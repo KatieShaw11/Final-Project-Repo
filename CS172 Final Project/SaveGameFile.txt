@@ -1,0 +1,3 @@
+2
+Default item
+The path continues.

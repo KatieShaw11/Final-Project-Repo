@@ -1,0 +1,29 @@
+0
+note axe
+To the east you can see a great lake in the distance, and beyond it a castle. On the north shore you can make out a forest, and to the south you see only rolling grasslands, although you can just see a dark shape on one of the hills. Behind you, to the west, is an insurmountable mountain range.
+east 1
+0
+
+1
+NO ITEM
+The path continues.
+west 0 east 2
+0
+
+2
+NO ITEM
+Index 2
+west 1 east 3
+0
+
+3
+NO ITEM
+Room index 3
+west 2 east 4
+0
+
+4
+boat
+Room index 3
+west 3
+1

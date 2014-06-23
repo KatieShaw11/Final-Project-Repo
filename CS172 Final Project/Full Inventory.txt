@@ -1,0 +1,35 @@
+note
+1
+1
+Good luck. Don’t worry, we’ll be there to help you along the way. Τις παγίδες από οι πιό αθώοι άνθρωποι τοποθετούνται, και εκείνοι πιό αθώοι εξαπατιούνται από τους.
+0.0
+
+matches
+1
+1
+They’re just matches.
+.2
+
+knife
+0
+1
+It’s a sharp butcher's knife.
+3.0
+
+translator
+1
+1
+It appears to be able to translate a message from any language into English.
+2.0
+
+axe
+0
+1
+It’s just an axe.
+5.0
+
+boat
+1
+0
+It is an old rowboat, without anything to row with.
+0.0
