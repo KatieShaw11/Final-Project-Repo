@@ -1,35 +1,65 @@
+<act>
 note
-1
 1
 Good luck. Don’t worry, we’ll be there to help you along the way. Τις παγίδες από οι πιό αθώοι άνθρωποι τοποθετούνται, και εκείνοι πιό αθώοι εξαπατιούνται από τους.
 0.0
 
+<act>
 matches
-1
 1
 They’re just matches.
 .2
 
+<nonact>
 knife
-0
 1
 It’s a sharp butcher's knife.
 3.0
 
+<act>
 translator
-1
 1
 It appears to be able to translate a message from any language into English.
 2.0
 
+<nonact>
 axe
-0
 1
 It’s just an axe.
 5.0
 
+<act>
 boat
-1
 0
 It is an old rowboat, without anything to row with.
 0.0
+
+<nonact>
+oars
+1
+They're just oars.
+5.0
+
+<nonact>
+lifevest
+1
+It's just a lifevest, excellent for keeping you afloat.
+2.0
+
+<act>
+chest
+1
+The chest is mahogany, carved with ornate designs, and embellished with a secure metal lock.
+4.0
+
+<nonact>
+book
+1
+It's a worn, paperback copy of "The Hobbit."
+0.5
+
+<nonact>
+key
+1
+It is a large brass key.
+0.5

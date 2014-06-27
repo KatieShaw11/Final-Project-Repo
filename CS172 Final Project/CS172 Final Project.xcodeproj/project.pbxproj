@@ -12,6 +12,8 @@
 		A22DA3F8193FD5A100279D8B /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A22DA3F6193FD5A100279D8B /* Room.cpp */; };
 		A231FA8D19457348002823A8 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A231FA8B19457348002823A8 /* Item.cpp */; };
 		A256D58419564C5300322ED2 /* InventoryS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A256D58219564C5300322ED2 /* InventoryS.cpp */; };
+		A256D58A1958E69500322ED2 /* Trigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A256D5881958E69500322ED2 /* Trigger.cpp */; };
+		A256D58D1958FF4A00322ED2 /* ActivatableItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A256D58B1958FF4A00322ED2 /* ActivatableItem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,8 +40,13 @@
 		A256D58219564C5300322ED2 /* InventoryS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InventoryS.cpp; sourceTree = "<group>"; };
 		A256D58319564C5300322ED2 /* InventoryS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryS.h; sourceTree = "<group>"; };
 		A256D58519576EA600322ED2 /* Full Inventory.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Full Inventory.txt"; sourceTree = SOURCE_ROOT; };
-		A256D5861957835A00322ED2 /* Rooms.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rooms.txt; sourceTree = SOURCE_ROOT; };
 		A256D5871957836200322ED2 /* Rooms test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Rooms test.txt"; sourceTree = SOURCE_ROOT; };
+		A256D5881958E69500322ED2 /* Trigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trigger.cpp; sourceTree = "<group>"; };
+		A256D5891958E69500322ED2 /* Trigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trigger.h; sourceTree = "<group>"; };
+		A256D58B1958FF4A00322ED2 /* ActivatableItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivatableItem.cpp; sourceTree = "<group>"; };
+		A256D58C1958FF4A00322ED2 /* ActivatableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivatableItem.h; sourceTree = "<group>"; };
+		A256D58E195904F200322ED2 /* Triggers.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Triggers.txt; sourceTree = SOURCE_ROOT; };
+		A256D58F195A76BB00322ED2 /* SaveGameFile.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = SaveGameFile.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,16 +80,21 @@
 			isa = PBXGroup;
 			children = (
 				A22DA3ED193FD26F00279D8B /* main.cpp */,
+				A256D58B1958FF4A00322ED2 /* ActivatableItem.cpp */,
+				A256D58C1958FF4A00322ED2 /* ActivatableItem.h */,
 				A231FA8B19457348002823A8 /* Item.cpp */,
 				A231FA8C19457348002823A8 /* Item.h */,
-				A22DA3F6193FD5A100279D8B /* Room.cpp */,
-				A22DA3F7193FD5A100279D8B /* Room.h */,
 				A256D58219564C5300322ED2 /* InventoryS.cpp */,
 				A256D58319564C5300322ED2 /* InventoryS.h */,
+				A22DA3F6193FD5A100279D8B /* Room.cpp */,
+				A22DA3F7193FD5A100279D8B /* Room.h */,
+				A256D5881958E69500322ED2 /* Trigger.cpp */,
+				A256D5891958E69500322ED2 /* Trigger.h */,
 				A22DA3EF193FD26F00279D8B /* CS172_Final_Project.1 */,
 				A256D58519576EA600322ED2 /* Full Inventory.txt */,
-				A256D5861957835A00322ED2 /* Rooms.txt */,
 				A256D5871957836200322ED2 /* Rooms test.txt */,
+				A256D58F195A76BB00322ED2 /* SaveGameFile.txt */,
+				A256D58E195904F200322ED2 /* Triggers.txt */,
 			);
 			path = "CS172 Final Project";
 			sourceTree = "<group>";
@@ -138,9 +150,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A256D58D1958FF4A00322ED2 /* ActivatableItem.cpp in Sources */,
 				A231FA8D19457348002823A8 /* Item.cpp in Sources */,
 				A256D58419564C5300322ED2 /* InventoryS.cpp in Sources */,
 				A22DA3F8193FD5A100279D8B /* Room.cpp in Sources */,
+				A256D58A1958E69500322ED2 /* Trigger.cpp in Sources */,
 				A22DA3EE193FD26F00279D8B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

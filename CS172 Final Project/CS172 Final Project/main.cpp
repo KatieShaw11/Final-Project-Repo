@@ -14,21 +14,33 @@
 #include <vector>
 #include "Item.h"
 #include "Room.h"
-#define FILENAME "/Users/katidid/Documents/COMP SCI 172/Final Project/CS172 Final Project/Rooms test.txt"
-#define INVENFILENAME "/Users/katidid/Documents/COMP SCI 172/Final Project/CS172 Final Project/Full Inventory.txt"
-#define MAXWEIGHT 15
+
+#define FILENAME "/Users/katidid/Documents/COMP SCI 172/Final Project Repo/CS172 Final Project/Rooms test.txt"
+#define INVENFILENAME "/Users/katidid/Documents/COMP SCI 172/Final Project Repo/CS172 Final Project/Full Inventory.txt"
+#define TRIGFILENAME "/Users/katidid/Documents/COMP SCI 172/Final Project Repo/CS172 Final Project/Triggers.txt"
+#define SAVELOADFILE "/Users/katidid/Documents/COMP SCI 172/Final Project Repo/CS172 Final Project/SaveGameFile.txt"
+
+// save/load file defined in Room.h
+#define MAXWEIGHT 20
 using namespace std;
 
 string makeUpperCase (string INPUT);
 void inventoryCommand(vector<string>& INVENTORY, double& TOTALWEIGHT);
-void getAllRooms(vector <Room>& Rooms);
-void saveGame(vector <Room>& Rooms);
+void getAllRooms(vector <Room>& Rooms, string FileName);
+void getAllTriggers(vector <Trigger> &Triggers);
+void saveGame(vector <Room>& Rooms, int CurrentID, vector <string>& Inventory);
+void loadGame(vector <Room>& Rooms, int &CurrentID, vector <string>& Inventory);
 double calcTotalWeight(vector<string>& INVENTORY);
+void helpCommand();
 
 
 
 int main()
 {
+    //Trigger test;
+    //test.TEST();
+    //return 1;
+    
     string input;
     bool gameOn = true;
     long position;
@@ -44,8 +56,11 @@ int main()
     
     Room* currentRoom;
     vector <Room> rooms;
-    getAllRooms(rooms);
+    getAllRooms(rooms, FILENAME);
     
+    vector <Trigger> triggers;
+    getAllTriggers(triggers);
+    cout << triggers[0].toString(); //tests
     
     currentRoom = &rooms[0];
 
@@ -74,7 +89,10 @@ int main()
         /////// Verb/noun command if statements: ////////
         
         
-        
+        if (currentRoom->checkTrigger(verb, noun, inventory, triggers)) // CHECKS FOR TRIGGERS AND ACTIVATES
+        {
+            cout << "Trigger Fired";
+        }
         
         if (verb == "inventory" || verb == "i") // PRINTS INVENTORY
         {
@@ -154,14 +172,47 @@ int main()
         }
         
         
-        
-        
         if ((verb == "save" && noun == "game") || verb == "save") // SAVE GAME
         {
-            saveGame(rooms);
+            saveGame(rooms, currentRoom->getID(), inventory);
             cout << "\nGAME SAVED\n";
         }
-        if (verb == "go") // MOVE AROUND
+        
+        if (verb == "load" || (verb == "load" && noun == "game"))
+        {
+            int currentRoomID;
+            loadGame(rooms, currentRoomID, inventory);
+            for (int i = 0; i < rooms.size(); i++)
+            {
+                if (rooms[i].getID() == currentRoomID)
+                {
+                    currentRoom = &(rooms[i]);
+                }
+            }
+        }
+        
+        if ((verb == "go" || verb == "swim") && (currentRoom->getID() == 8 || currentRoom->getID() == 14 || currentRoom->getID() == 15 )) // SAME AS GO BUT FOR SWIMMING IN CERTAIN AREAS
+        {
+            int adjacentRoomID = currentRoom->go(noun);
+            if (adjacentRoomID == -1)
+                cout << "You can't go that way!\n";
+            else
+            {
+                for (int i = 0; i < rooms.size(); i++)
+                {
+                    if(adjacentRoomID == i)
+                    {
+                        currentRoom = & rooms[i];
+                        cout << "Room index " << i << ", State: " << currentRoom->getState() <<endl;
+                        cout << currentRoom->getDescription() << endl;
+                    }
+                    
+                }
+                
+            }
+        }
+        
+        else if (verb == "go") // MOVE AROUND
         {
             int adjacentRoomID = currentRoom->go(noun);
             if (adjacentRoomID == -1)
@@ -182,6 +233,7 @@ int main()
             }
         }
         
+
         
         
         if (verb == "run")
@@ -198,9 +250,22 @@ int main()
         {
             cout << currentRoom->getDescription() << endl;
         }
+        if (verb == "help" || verb == "menu")
+        {
+            helpCommand();
+        }
+        /*
+        else
+        {
+            cout << "\nCommand not recognized. Make sure you didn't slip into a Klingon dialect and try again.\n";
+        }
+        */
     }
 }
-// END MAIN
+
+///////////////////////////////////////// END MAIN /////////////////////////////////////////
+
+
 
 
 
@@ -236,9 +301,9 @@ void inventoryCommand(vector<string>& INVENTORY, double& TOTALWEIGHT)
         cout << "Your pack is empty.\n";
 }
 
-void getAllRooms(vector <Room>& Rooms)
+void getAllRooms(vector <Room>& Rooms, string FileName)
 {
-    ifstream inputFile(FILENAME);
+    ifstream inputFile(FileName);
     
     if (!inputFile.is_open())
     {
@@ -259,11 +324,105 @@ void getAllRooms(vector <Room>& Rooms)
     inputFile.close();
 }
 
-void saveGame(vector <Room>& Rooms)
+void getAllTriggers(vector <Trigger> &Triggers)
 {
-    for (int i = 0; i < Rooms.size(); i++)
-        Rooms[i].saveRoom();
-    cout << "GAME SAVED";
+    ifstream inputFile(TRIGFILENAME);
+    
+    if (!inputFile.is_open())
+    {
+        cout << "File does not exist.";
+    }
+    else
+    {
+        
+        while(true)
+        {
+            Trigger trigger;
+            if(!trigger.readTrigger(inputFile))
+                break;
+            Triggers.push_back(trigger);
+        }
+    }
+    inputFile.close();
+}
+
+void saveGame(vector <Room>& Rooms, int CurrentID, vector <string>& Inventory)
+{
+    ofstream saveFile(SAVELOADFILE);
+    if (!saveFile.is_open())
+    {
+        cout << "File does not exist.";
+    }
+    else
+    {
+        saveFile << CurrentID << endl;  // SAVING CURRENT ROOM
+        
+        if(Inventory.size()<=0)  // SAVING INVENTORY
+        {
+            saveFile << "NOINVEN";
+        }
+        else
+        {
+            saveFile << Inventory.size() << " ";
+            saveFile << Inventory[0];
+            for (int i = 1; i < Inventory.size(); i++)
+            {
+                saveFile << " " << Inventory[i];
+            }
+        }
+        
+        saveFile << endl; // (space separating inventory from room data
+        
+        for (int i = 0; i < Rooms.size(); i++) // SAVING ROOMS
+            Rooms[i].saveRoom(saveFile);
+    }
+    saveFile.close();
+}
+
+void loadGame(vector <Room>& Rooms, int &CurrentID, vector <string>& Inventory)
+{
+    
+    
+    ifstream inputFile(SAVELOADFILE);
+    
+    string inventoryLine;
+    long invenSize;
+    string currentItem;
+    
+    if (!inputFile.is_open())
+    {
+        cout << "File does not exist.";
+    }
+    else
+    {
+        Rooms.clear();
+        Inventory.clear();
+        inputFile >> CurrentID;
+        cout << CurrentID<<endl;
+        getline(inputFile, inventoryLine);
+        cout << inventoryLine << endl;
+        
+        if (inventoryLine != "NOINVEN")
+        {
+            stringstream(inventoryLine) >> invenSize;
+            cout << "Inven size: " << invenSize << " ";
+            for(int i = 0; i < invenSize; i++)
+            {
+                stringstream(inventoryLine) >> currentItem;
+                Inventory.push_back(currentItem);
+                cout << currentItem << " ";
+            }
+        }
+        while(true)
+        {
+            Room room;
+            if(!room.readRoomFromFile(inputFile))
+                break;
+            Rooms.push_back(room);
+            //room.printRoom(); // for testing
+        }
+    }
+    inputFile.close();
 }
 
 double calcTotalWeight(vector<string>& INVENTORY) // Calculates inventory weight
@@ -278,3 +437,18 @@ double calcTotalWeight(vector<string>& INVENTORY) // Calculates inventory weight
     return sum;
 }
 
+void helpCommand()
+{
+    cout << "\nGAME HELP\n\n";
+    cout << "Objective: The game's objetive is quite up to you. Help the heroes win, and defeat the villians! Or simply explore to your heart's content. Either way, use two-word commands to make the player move around the map and perform tasks.\n\n";
+    cout << "Controls: Because text-based adventure games are both finnicky (this one more than most) and rather antiquated, here are some of the more useful keywords:\n";
+    cout << "\thelp : displays this page\n";
+    cout << "\ttake [item] : places [item] in the user's inventory, if s/he has enough room\n";
+    cout << "\tdrop [item] : removes [item] from inventory and leaves it in the current location\n";
+    cout << "\tgo [north/south/east/west] : allows the character to move\n";
+    cout << "\tsave : saves the game\n";
+    cout << "\tload : loads a saved game\n";
+    cout << "\texamine [item] : displays [item's] description\n";
+    cout << "\tinventory (or \"i\") : displays items in your current inventory\n";
+    cout << "\tlook : displays current surroundings\n\n";
+}

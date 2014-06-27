@@ -143,24 +143,44 @@ bool Room::readRoomFromFile(ifstream& str)
     return true;
 }
 
-void Room::saveRoom()
+void Room::saveRoom(ofstream & ofs)
 {
-    ofstream saveFile("/Users/katidid/Documents/COMP SCI 172/Final Project/CS172 Final Project/SaveGameFile.txt");
-    if (!saveFile.is_open())
-    {
-        cout << "File does not exist.";
-    }
+    ofs << ID << endl;
+    if(items.size()==0)
+        ofs << "NO ITEM";
     else
     {
-            saveFile << ID << endl;
-            for (int i = 0; i < items.size(); i++)
-            {
-                saveFile << items[i] << endl;
-            }
-            saveFile << description << endl;
+        ofs << items[0];
+        for (int i = 1; i < items.size(); i++)
+        {
+            ofs << " " << items[i];
+        }
     }
-    saveFile.close();
+    
+    ofs << endl << description << endl;
+    
+    if (adjacentRooms.size() <= 0)
+        ofs << "";
+    else
+    {
+        ofs << adjacentRoomDirections[0] << " " << adjacentRooms[0];
+        for (int i = 1; i < adjacentRoomDirections.size(); i++)
+        {
+            ofs << " " << adjacentRoomDirections[i] << " " << adjacentRooms[i];
+        }
+    }
+    
+    ofs << endl << state << endl;
+
 }
+
+/*
+ 0
+ note axe
+ To the east you can see a great lake in the distance, and beyond it a castle. On the north shore you can make out a forest, and to the south you see only rolling grasslands, although you can just see a dark shape on one of the hills. Behind you, to the west, is an insurmountable mountain range.
+ east 1
+ 0
+ */
 
 void Room::printRoom()
 {
@@ -171,6 +191,8 @@ void Room::printRoom()
         cout << items[i] << endl;
     }
 }
+
+
 
 bool Room::removeItem(string movingItem)
 {
@@ -193,17 +215,7 @@ void Room::addItemToRoom(string movingItem)
     items.push_back(movingItem);
 }
 
-string Room::getDescription()
-{
-    stringstream descriptionWithItems;
-    descriptionWithItems << description << " Items: ";
-    for (int i = 0; i < items.size(); i++)
-    {
-        descriptionWithItems << items[i] << ", ";
-    }
-    return descriptionWithItems.str();
-    //return description;
-}
+
 
 int Room::go(string Direction)
 {
@@ -217,7 +229,65 @@ int Room::go(string Direction)
     return -1;
 }
 
+
+
+bool Room::checkTrigger(string Verb, string Noun, vector<string> &CarriedItems, vector<Trigger> Triggers) //triggers from main
+{
+    for (int i = 0; i < Triggers.size(); i++)
+    {
+        if (Triggers[i].getNesCurrentRoomID() != ID)
+            continue; // return to the beginning of the loop; looking for only when the IDs are the same
+        
+        if (Triggers[i].checkTTrigger(Verb, Noun, CarriedItems, items) == false)
+        {
+            cout << "\nreturning false from checkTrigger\n";
+            
+        }
+        else
+        {
+            adjacentRoomDirections.push_back(Triggers[i].getNewDirection());
+        
+            for (int i = 0; i< adjacentRoomDirections.size(); i++)
+                cout << "adjacent room directions: " << adjacentRoomDirections[i] << endl;
+        
+            adjacentRooms.push_back(Triggers[i].getNewRoom());
+        
+            for (int i = 0; i< adjacentRooms.size(); i++)
+                cout << "adjacent rooms: " << adjacentRooms[i] << endl;
+            
+            if (Triggers[i].getNewDescription().length() > 1) // 1 b/c I used a single double quote as a placeholder
+                description = Triggers[i].getNewDescription();
+            
+            if(Triggers[i].getTrigResponse().length() > 0)
+                cout << Triggers[i].getTrigResponse();
+        
+            return true;
+        }
+    }
+    return false;
+}
+
+
+/////////////////////////////////////////// Accessors: //////////////////////////////////////////////
+
+int Room::getID()
+{
+    return ID;
+}
+
 int Room::getState()
 {
     return state;
+}
+
+string Room::getDescription()
+{
+    stringstream descriptionWithItems;
+    descriptionWithItems << description << " Items you see: ";
+    for (int i = 0; i < items.size(); i++)
+    {
+        descriptionWithItems << items[i] << ", ";
+    }
+    return descriptionWithItems.str();
+    //return description;
 }

@@ -24,6 +24,91 @@ west 2 east 4
 
 4
 boat
-Room index 3
-west 3
+Room index 4 : You reach a rocky beach. The lake is large and the water is choppy. There is a boat tethered to a pole in the water. It’s a sunny day, but it’s misty along the beach, and you can’t see more than 20 feet in any direction, although you see that the beach stretches north.
+west 3 north 5
 1
+
+5
+door
+Room index 5 : A small boatshed appears, with a flimsy lock on the handle.
+south 4
+0
+
+6
+NO ITEM
+Room index 6: You row out into the lake.
+west 4 east 8
+0
+
+7
+oars lifevest chest
+Room index 7: Inside the dank, dimly lit room, you find several items.
+south 5
+0
+
+8
+NO ITEM
+Room index 8: From the boat, the water looks quite calm here. It's a nice day for a swim.
+west 6 east 9 down 14
+0
+
+9
+NO ITEM
+Room index 9: You can see the shore to the east from here.
+west 8 east 10
+0
+
+10
+NO ITEM
+Room index 10: You finally make it to shore! In front of you are the castle gates. The entrance is dismal. You can feel the sadness in the air, like a sickness. Vines crawl among the bars of an iron-wrought gate, which blocks the bridge over the castle's moat.
+west 9
+0
+
+11
+NO ITEM
+Room index 11: To the west are the gates, and to the east is a narrow bridge, barely wide enough for you to stand, that passes over a moat. Murky, muddy water lazily swirls beneath you.
+west 10 east 12
+0
+
+12
+NO ITEM
+Room index 12: In front of you is a massive, heavy-looking door. The brass knocker, so high up you can barely reach it, curls forward in the shape of a snake, two bodies coming forward and meeting in the head. A matching keyhole is at eye-level.
+west 11
+1
+
+13
+NO ITEM
+Room index 13 : Entrance hall
+west 12
+1
+
+14
+NO ITEM
+Room index 14 : The surface is glimmering above you, but you see an opening below. If you could just swim down a bit farther, you could reach it.
+up 8 down 15
+0
+
+15
+NO ITEM
+Room index 15: You pull yourself through the opening, and feel yourself being carried up. You break through the surface of the water to find yourself in an underwater cave. Stalagmites and stalactites pepper the floor and ceiling, which is only about five feet high. As you peer through the columns, you see a passage the northeast and one to the northwest that seems to be blocked off by a cave-in.
+up 14 northeast 16
+0
+
+16
+NO ITEM
+Room index 16: The passage is narrow and very dark, so that you have to feel your way through. It continues northeast.
+northeast 17
+0
+
+17
+NO ITEM
+Room index 17: You feel the ground turn soft and loose beneath your feet, and the cool stone of the end of the passage.
+southeast 16
+1
+
+18
+translator key
+Room index 18: It's a tight fit, well packed walls that fit around your body like the walls of a coffin.
+up 17
+0
+

@@ -46,10 +46,6 @@ double Item::getWeight()
     return weight;
 }
 
-bool Item::getAct()
-{
-    return activateAble;
-}
 bool Item::getTake()
 {
     return takeAble;
@@ -80,12 +76,6 @@ bool Item::readItemFile(ifstream& str)
     else
         return false;
     
-    if(getNextItemDataLine(str, inputLine)) // ActivateAble
-    {
-        stringstream(inputLine) >> activateAble;
-    }
-    else
-        return false;
     
     if(getNextItemDataLine(str, inputLine)) // takeAble
     {

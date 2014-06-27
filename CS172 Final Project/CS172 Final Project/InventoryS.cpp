@@ -10,6 +10,20 @@
 
 static vector <Item> theInventory;
 
+bool getNextInventoryDataLine(ifstream& ifstr, string& inputLine) //helper function for reading lines excluding empty lines to make files more readable; to replace getlines
+{
+    inputLine = "";
+    while (inputLine.length()<= 0)
+    {
+        if(!getline(ifstr, inputLine))
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 
 void InventoryS::addItem(string)
 {
@@ -32,11 +46,24 @@ bool InventoryS::readFromFile(ifstream& str)
 {
     while(!str.eof())
     {
+        string activateCheck;
+        getNextInventoryDataLine(str, activateCheck);
+        
         Item item;
-        if(item.readItemFile(str)==false)
-            break;
-        //item.readItemFile(str);
-        theInventory.push_back(item);
+        ActivatableItem aItem;
+        if (activateCheck == "<nonact>") // reading in regular items
+        {
+            if(item.readItemFile(str)==false)
+                break;
+            theInventory.push_back(item);
+        }
+        
+        if (activateCheck == "<act>") // reading in activatable items
+        {
+            if(aItem.readItemFile(str)==false)
+                break;
+            theInventory.push_back(aItem);
+        }
     }
     return true;
 }
@@ -75,15 +102,4 @@ bool InventoryS::getTakeOf(string Name)
     }
     
     return "No takeAble status for this item.";
-}
-
-bool InventoryS::getActOf(string Name)
-{
-    for(int i = 0; i < theInventory.size(); i++)
-    {
-        if(theInventory[i].getName() == Name)
-            return theInventory[i].getAct();
-    }
-    
-    return "No activateAble status for this item.";
 }

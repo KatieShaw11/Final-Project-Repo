@@ -22,7 +22,6 @@ public:
     Item(string Description, double Weight, bool TakeAble);
     string getDescription();
     double getWeight();
-    bool getAct();
     bool getTake();
     void setWeight(double Weight);
     
@@ -37,7 +36,6 @@ private:
     string description;
     double weight;
     bool takeAble;
-    bool activateAble;
 };
 
 #endif /* defined(__CS172_Final_Project__Item__) */

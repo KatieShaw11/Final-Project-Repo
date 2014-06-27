@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Item.h"
+#include "ActivatableItem.h"
 #include <vector>
 #include <sstream>
 #include <fstream>
@@ -29,7 +30,6 @@ public:
     static double getWeightOf(string Name);
     static string getDescriptionOf(string Name);
     static bool getTakeOf(string Name);
-    static bool getActOf(string Name);
 
 };
 

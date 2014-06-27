@@ -16,7 +16,9 @@
 #include <fstream>
 #include "Item.h"
 #include "InventoryS.h"
+#include "Trigger.h"
 using namespace std;
+
 
 class Room
 {
@@ -35,12 +37,15 @@ public:
     bool removeItem(string item); // checks if item is in room and removes it if it is (to be placed in inventory, NOT included)
     bool readRoomFromFile(ifstream& str);
     void printRoom();
-    void saveRoom();
+    void saveRoom(ofstream & ofs);
     string getDescription();
     int getState();
     void addItemToRoom(string movingItem);
     
+    bool checkTrigger(string Verb, string Noun, vector<string> &CarriedItems, vector<Trigger> Triggers);
+    
     int go(string Direction); // moves between rooms
+    int getID();
 
 };
 

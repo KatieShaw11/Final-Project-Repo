@@ -1,0 +1,48 @@
+4
+row boat
+oars
+boat
+east 6
+"
+Great! You've unlocked a new direction. You can now use the boat to go out onto the lake.
+
+5
+chop door
+axe
+door
+north 7
+The boatshed is to the north, the door ajar. The boat is to the south.
+Wow. Impressive. Albeit violent. You can get in the boathouse now.
+
+5
+break lock
+axe
+door
+north 7
+The boatshed is to the north, the door ajar. The boat is to the south.
+The lock snaps off, and you can now enter the boathouse.
+
+10
+climb gate
+"
+"
+east 11
+"
+You clamber up the gate and down the other side.
+
+12
+unlock door
+key
+"
+east 13
+To the immediate east of you is the now unlocked door. To the west is the bridge and the vine-covered gate.
+The door unlocks with a staisfying "click."
+
+17
+dig "
+"
+"
+down 18
+You are at the end of the passage, above the site of the buried key and northeast of the tunnel.
+You uncover a trap door. You throw a small pebble down, and realize it's only about five feet down, but you will have to go down to tell what is inside.
+
