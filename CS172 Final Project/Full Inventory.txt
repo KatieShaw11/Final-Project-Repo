@@ -63,3 +63,9 @@ key
 1
 It is a large brass key.
 0.5
+
+<act>
+bomb
+1
+The bomb was given to you by the fairies, to be activated outside the castle.
+1

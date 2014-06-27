@@ -240,20 +240,14 @@ bool Room::checkTrigger(string Verb, string Noun, vector<string> &CarriedItems, 
         
         if (Triggers[i].checkTTrigger(Verb, Noun, CarriedItems, items) == false)
         {
-            cout << "\nreturning false from checkTrigger\n";
+            //cout << "\nreturning false from checkTrigger\n";
             
         }
         else
         {
             adjacentRoomDirections.push_back(Triggers[i].getNewDirection());
         
-            for (int i = 0; i< adjacentRoomDirections.size(); i++)
-                cout << "adjacent room directions: " << adjacentRoomDirections[i] << endl;
-        
             adjacentRooms.push_back(Triggers[i].getNewRoom());
-        
-            for (int i = 0; i< adjacentRooms.size(); i++)
-                cout << "adjacent rooms: " << adjacentRooms[i] << endl;
             
             if (Triggers[i].getNewDescription().length() > 1) // 1 b/c I used a single double quote as a placeholder
                 description = Triggers[i].getNewDescription();
@@ -283,10 +277,15 @@ int Room::getState()
 string Room::getDescription()
 {
     stringstream descriptionWithItems;
-    descriptionWithItems << description << " Items you see: ";
-    for (int i = 0; i < items.size(); i++)
+    descriptionWithItems << description;
+    if (items.size()>0)
     {
-        descriptionWithItems << items[i] << ", ";
+        descriptionWithItems << " Items you see: ";
+        descriptionWithItems << items[0];
+        for (int i = 1; i < items.size(); i++)
+        {
+            descriptionWithItems << ", " << items[i];
+        }
     }
     return descriptionWithItems.str();
     //return description;

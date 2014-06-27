@@ -41,7 +41,7 @@ bool Trigger::readTrigger(ifstream& str)
     if(getNextTriggerDataLine(str, inputLine)) // room ID
     {
         stringstream(inputLine) >> nesCurrentRoomID;
-        cout << "ID: " << nesCurrentRoomID << endl;
+        //cout << "ID: " << nesCurrentRoomID << endl; //testing
     }
     else
         return false;
@@ -49,7 +49,7 @@ bool Trigger::readTrigger(ifstream& str)
     if(getNextTriggerDataLine(str, inputLine)) // Command
     {
         stringstream(inputLine) >> nesVerb >> nesNoun;
-        cout << "command: verb: "<< nesVerb << " Noun: " << nesNoun << endl;
+        //cout << "command: verb: "<< nesVerb << " Noun: " << nesNoun << endl; //testing
 
     }
     else
@@ -58,7 +58,7 @@ bool Trigger::readTrigger(ifstream& str)
     if(getNextTriggerDataLine(str, inputLine)) // item
     {
         neededItem = inputLine;
-        cout << "item: " << neededItem << endl;
+        //cout << "item: " << neededItem << endl; //testing
 
     }
     else
@@ -68,7 +68,7 @@ bool Trigger::readTrigger(ifstream& str)
     if(getNextTriggerDataLine(str, inputLine)) // room item
     {
         neededRoomItem = inputLine;
-        cout << "roomItem: "  << neededRoomItem << endl;
+        //cout << "roomItem: "  << neededRoomItem << endl; //testing
 
     }
     else
@@ -129,15 +129,18 @@ void Trigger::TEST()
 
 bool Trigger::checkTTrigger(string Verb, string Noun, vector<string> & InvenItems, vector<string> &RoomItems)
 {
+    //TESTING
+    /*
     cout << "Noun: " << Noun << " Necessary noun: " << nesNoun << endl;
     cout << "Verb: " << Verb << " Necessary verb: " << nesVerb << endl;
     cout << "Needed item: " << neededItem << endl;
     cout << "NeededRoomitem: " << neededRoomItem << endl;
+     */
     if (nesVerb.length() > 1) // 1 because I used a single double quote as a placeholder
     {
         if(Verb != nesVerb)
         {
-            cout << "\nreturning false from verb\n";
+            //cout << "\nreturning false from verb\n"; //testing
             return false;
         }
     }
@@ -145,24 +148,25 @@ bool Trigger::checkTTrigger(string Verb, string Noun, vector<string> & InvenItem
     {
         if(findInInventory (InvenItems, 0, InvenItems.size()-1, neededItem)==false)
         {
-            cout << "\nreturning false from size\n";
+            //cout << "\nreturning false from size\n"; //testing
             return false;
         }
     }
     else if (Noun != nesNoun)
     {
-        cout << "\nreturning false from noun\n";
+        //cout << "\nreturning false from noun\n"; //testing
         return false;
     }
     else if (neededRoomItem.length()>1) // 1 because I used a single double quote as a placeholder
     {
         if(findInInventory (RoomItems, 0, RoomItems.size()-1, neededRoomItem)==false)
         {
-            cout << "Room items:";
-            for (int i = 0; i< RoomItems.size(); i++)
-                cout << "Room item at " << i << ": " << RoomItems[i];
-            cout << "neededRoomItem" << neededRoomItem;
-            cout << "\nreturning false from room inventory\n";
+            //FOR TESTING ONLY
+            //cout << "Room items:";
+            //for (int i = 0; i< RoomItems.size(); i++)
+                //cout << "Room item at " << i << ": " << RoomItems[i];
+            //cout << "neededRoomItem" << neededRoomItem;
+            //cout << "\nreturning false from room inventory\n";
             return false;
         }
     }

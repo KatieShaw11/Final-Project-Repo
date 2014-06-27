@@ -42,7 +42,7 @@ bool InventoryS::searchInven(string Name)
     }
     return false;
 }
-bool InventoryS::readFromFile(ifstream& str)
+bool InventoryS::readFromFile(ifstream& str) //inheritance/polymorphism
 {
     while(!str.eof())
     {
